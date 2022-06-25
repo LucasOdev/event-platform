@@ -2,13 +2,8 @@ import { Logo } from "../components/Logo";
 import { useState, FormEvent } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
-const CREATE_SUBSCRIBER_MUTATION = gql`
-mutation CreateSubscriber ($name: String!, $email: String!) {
-  createSubscriber(data: {name: $name, email: $email}) {
-    id
-  }
-}
-`
+import { useCreateSubscriberMutation } from "../graphql/generated";
+
 
 
 export function Subscribe() {
@@ -17,7 +12,7 @@ export function Subscribe() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
 
-    const [createSubscriber, { loading }] = useMutation(CREATE_SUBSCRIBER_MUTATION)
+    const [createSubscriber, { loading }] = useCreateSubscriberMutation()
 
     async function handleSubscribe (event: FormEvent) {
         event?.preventDefault();
@@ -38,7 +33,7 @@ export function Subscribe() {
             <div className=" max-w-[640px]">
                 <Logo />
 
-               <h1 className="mt-8 text-[2.5rem] leading-tight">Construa uma <strong className="text-blue-500">aplicação completa</strong> , do zero, com <strong className="text-blue-500">React</strong>
+               <h1 className="mt-8 text-[2.5rem] leading-tight">Construa uma <strong className="text-blue-500">aplicação completa</strong>, do zero, com <strong className="text-blue-500">React</strong>
                </h1>
                <p className="mt-4 text-gray-200 leading-relaxed">Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae illum quidem porro ipsam id laudantium sint, quasi accusantium! Illo molestiae necessitatibus perspiciatis itaque odio dignissimos cum assumenda exercitationem blanditiis dolorem?</p>
             </div>
